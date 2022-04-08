@@ -1,0 +1,75 @@
+.modal_content{
+    margin-top: 5px;
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: column;
+    .title_text{
+        margin-bottom: 5px;
+    }
+    .modal_select{
+        gap: 10px;
+    }
+    .modal_time{
+        .thing_date{
+            input[type=date]{
+                height: 28px;
+            }
+        }
+        .thing_time{
+            input[type=time]{
+                height: 28px;
+            } 
+        }
+    }
+    .modal_repeat{
+        width: 15%;
+        border: none;
+    }
+    .modal_repeat:hover{
+        background-color: $bg1;
+        transition: background-color 0.3s;
+    }
+    .modal_detail{
+        padding: 5px 0;
+    }
+    .modal_color{
+        input[type=color]{
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: none;
+            background-color: inherit;
+            cursor: pointer;
+        }
+        input::-webkit-color-swatch{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: none;
+        }
+    }
+    .modal_btn{
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        button{
+            padding: 3px 10px;
+            font-size: 1em;
+            font-weight: 600;
+            background-color: $col2;
+            color: $col1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: $col3;
+            transition: background-color 0.3s;
+        }
+    }
+}
+.js_c{
+    display: flex;
+    align-items: center;
+}

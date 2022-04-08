@@ -1,0 +1,19 @@
+.Target{
+    flex-basis: 50%;
+    background-color: $bg2;
+    padding: 10px;
+    .target_title{
+        padding: 5px 0;
+        border-bottom: 2px solid $bg3;
+    }
+    .target_content{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        p{
+            display: flex;
+            gap: 5px;
+            padding: 3px 0;
+        }
+    }
+}

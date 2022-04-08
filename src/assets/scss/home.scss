@@ -1,0 +1,108 @@
+.home{
+    display: flex;
+    .select_bar{
+      height: 100vh;
+      padding: 5px;
+      flex-basis: 4%;
+      background-color: $col3;
+      display: flex;
+      flex-direction: column;
+      i{
+        margin: 40px 0;
+      }
+    }
+    .veiw{
+      height: 100vh;
+      flex-basis: 96%;
+      display: flex;
+      flex-direction: column;
+      .navbar{
+          flex-basis: 5vh;
+          padding: 25px;
+          display: flex;
+          justify-content: space-between;
+          border-bottom: 1px solid $bg1;
+          box-shadow: 0px 1px 3px 1px $bg3;
+          .logo{
+            font-family: Arial Black;
+            font-weight: 900;
+            font-size: 1.6em;
+          }
+          .navbar_content{
+            line-height: 36px;
+            height: 36px;
+            i{
+              margin: 0 10px;
+              color: $icon1;
+            }
+          }
+      }
+      .veiw_calandar{
+          flex-basis: 95vh;
+          display: flex;
+          .function_bar{
+              padding: 10px;
+              padding-right: 5px;
+              flex-basis: 20%;
+              background-color: $bg1;
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
+              .small_calandar{
+                flex-basis: 50%;
+                background-color: $col4;
+                border: 0.5px solid $col4;
+              }
+          }
+          .calandar_content{
+              flex-basis: 80%;
+              padding: 10px;
+              padding-left: 5px;
+              display: flex;
+              flex-direction: column;
+              background-color: $bg1;
+            .filter_bar{
+                margin-bottom: 10px;
+                background-color: $bg2;
+                display: flex;
+                justify-content: space-around;
+                padding: 5px;
+                gap: 0.5em;
+                .flex_box{
+                  flex-grow: 1;
+                  height: 40px;
+                  line-height: 40px;
+                }
+                .filter_radius{
+                  border-radius: 5px;
+                  border: 2px solid $bg1;
+                }
+                .change_unit{
+                  display: flex;
+                  .cell_grow{
+                    flex-grow: 1;
+                  }
+                  .I{
+                    width: 2px;
+                    height: 60%;
+                    background-color: $bg1;
+                    margin: auto;
+                  }
+                  .calandar_type{
+                    text-decoration: none;
+                    color: black;
+                  }
+                  .cell_grow_mark{
+                    background-color: $bg5;
+                  }
+                }
+            }
+          }
+      }
+    }
+}
+.radius{
+  border-radius: 5px;
+  border: 0.5px solid $bg2;
+  box-shadow: 0px 1px 3px 1px $bg3;
+}

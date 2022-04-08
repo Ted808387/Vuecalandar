@@ -1,0 +1,32 @@
+@import './variables';
+@import './home.scss';
+@import './calandar_right.scss';
+@import './target.scss';
+@import './calandar.scss';
+@import './matter_modal.scss';
+@import './calandarweek.scss';
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
+i::before{
+    font-family: fontawesome;
+}
+.ptb-5{
+    padding: 5px 0;   
+}
+.router-link-active{
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,72 @@
+.calandar_canter_title{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: $bg2;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 1px solid $bg3;
+    border-right: none;
+    border-bottom: none;
+    .canlandar_week{
+        border-right: 1px solid $bg3;
+    }
+}
+.calandar{
+    flex-basis: 100%;
+    background-color: $bg2;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
+    border: 1px solid $bg3;
+    border-right: none;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    .calandar_day{
+        padding: 5px;
+        border-right: 0.5px solid $bg3;
+        border-bottom: 0.5px solid $bg3;
+        .day{
+            width: 25px;
+            height: 25px;
+            line-height: 25px;
+            border-radius: 50%;
+            margin: 0 auto 5px;
+        }
+        .todolist{
+            list-style: none;
+            .matter{
+                max-width: 195px;
+                text-align: start;
+                padding: 2px 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                border-radius: 5px;
+                cursor: pointer;
+                .list{
+                    display: inline-block;
+                    padding: 0 3px;
+                    font-size: 0.5em;
+                }
+            }
+            .matter:before{
+                content: '';
+                font-weight: bold;
+                display: inline-block;
+                width: 0.6em;
+                height: 0.6em;
+                margin-right: 0.4em;
+                border-radius: 50%;
+                background-color: var(--bgcolor);
+            }
+            .matter:hover{
+                background-color: $bg1;
+                transition: background-color 0.5s;
+            }
+        }
+    }
+}
+.day_font_mark{
+    color: $bg2;
+    font-weight: 600;
+    background-color: $col3;
+}
