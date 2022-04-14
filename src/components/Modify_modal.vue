@@ -2,46 +2,50 @@
     <div>
         <vue-final-modal name="modify" v-model="this.$store.state.modifyModal" focus-retain click-to-close drag hide-overlay classes="modal-container" content-class="modal-content">
             <div class="modal__title">
-                事件紀錄
-                <button class="modal__close" @click="modify">
+                事件修改
+                <button class="modal__close" @click="closemodal">
                     <div class="close">X</div>
                 </button>
             </div>
             <div class="modal__content">
                 <div class="modal_content">
-                <input class="title_text ptb-5" type="text" placeholder="新增標題" v-model="this.$store.state.thing.title">
+                <input class="title_text ptb-5" type="text" placeholder="新增標題" v-model="modifything.title">
                 <div class="modal_select js_c ptb-5">
                     <div class="select1">
-                        <input  id="sele1" type="radio" name="select" value="work" v-model="this.$store.state.thing.type"><label for="sele1">工作</label>
+                        <input  id="sele1" type="radio" name="select" value="1" v-model="modifything.type"><label for="sele1">工作</label>
                     </div>
                     <div class="select2">
-                        <input  id="sele2" type="radio" name="select" value="activity" v-model="this.$store.state.thing.type"><label for="sele2">活動</label>
+                        <input  id="sele2" type="radio" name="select" value="2" v-model="modifything.type"><label for="sele2">活動</label>
                     </div>
                 </div>
                 <div class="modal_time js_c ptb-5">
                     <div class="thing_date">
-                        <input id="start_date" type="date" v-model="this.$store.state.thing.start_date"><span>~</span>
-                        <input id="end_date" type="date" v-model="this.$store.state.thing.end_date" v-show="allday">
+                        <input id="start_date" type="date" v-model="modifything.start_date">
                     </div>
-                    <div class="thing_time" v-show="!allday">
-                        <input id="start_time" type="time" v-model="this.$store.state.thing.start_time"><span>~</span>
-                        <input id="end_time" type="time" v-model="this.$store.state.thing.end_time">
+                    <div class="thing_time" v-show="!modifything.allday">
+                        <span>-</span>
+                        <input id="start_time" type="time" v-model="modifything.start_time">
+                        <span>~</span>
+                        <input id="end_time" type="time" v-model="modifything.end_time">
                     </div>
                 </div>
                 <div class="modal_all_day js_c ptb-5">
-                    <input id="all_day" type="checkbox" name="all_day" v-model="allday">
-                    <label for="all_day">全天</label>
+                    <input id="all_daychange" type="checkbox" v-model="modifything.allday">
+                    <label for="all_daychange" data-name="全天"></label>
+                    <input id="statuschange" type="checkbox" v-model="modifything.status">
+                    <label for="statuschange" data-name="停止活動"></label>
                 </div>
                 <div class="modal_detail js_c ptb-5">
-                    <textarea id="textarea" placeholder="輸入內容" rows="3" cols="65" v-model="this.$store.state.thing.detail"></textarea>
+                    <textarea id="textarea" placeholder="輸入內容" rows="3" cols="65" v-model="modifything.detail"></textarea>
                 </div>
                 <div class="modal_color js_c ptb-5">
-                    <input class="thing_color" type="color" name="color" id="color" v-model="this.$store.state.thing.color">
+                    <input class="thing_color" type="color" name="color" id="color" v-model="modifything.color">
                     <label for="color">設定活動顏色</label>
                 </div>
                 <div class="modal_btn">
-                    <button class="entry" @click="modify">確認</button>
-                    <button class="cancel" @click="modify">取消</button>
+                    <i class="fa-solid fa-trash-can fa-lg" @click="deletd(modifything)"></i>
+                    <button class="entry" @click="modify(modifything)">確認</button>
+                    <button class="cancel" @click="closemodal">取消</button>
                 </div>
                 </div>
             </div>
@@ -57,16 +61,21 @@ export default {
     components: {
         VueFinalModal,
     },
-    data(){
-        return{
-            thing: {},
-            allday: false,
+    computed: {
+        modifything(){
+            return this.$store.state.thing
         }
     },
     methods: {
-        modify(){
-            this.$store.commit('closeModifyModal')
+        modify(data){
+            this.$store.dispatch('changeThing', data)
         },
+        closemodal(){
+            this.$store.commit('closemodifyModal')
+        },
+        deletd(thing){
+            this.$store.dispatch('deleteThing', thing)
+        }
     },
 }
 </script>

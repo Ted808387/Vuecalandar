@@ -30,3 +30,46 @@ i::before{
     text-decoration: none;
     color: black;
 }
+.cell_grow_mark{
+    background-color: $bg5;
+    transition: background-color .2s ease-in-out;
+}
+input[type="checkbox"]{
+    display: none;
+}
+input[type="checkbox"] + label{
+    color:#000000;
+    position: relative;
+}
+input[type="checkbox"] + label{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: -2px 10px 0 0;
+    background-color: rgb(255, 255, 255);
+    border: 2px solid #47AC73;
+    border-radius: 3px;
+    cursor: pointer;
+}
+input[type="checkbox"] + label::before{
+    content: attr(data-name);
+    display: inline-block;
+    width: 80px; 
+    height: 20px;
+    text-align: start;
+    vertical-align: middle; 
+    margin: -5px 0 0 20px;
+
+}
+input[type="checkbox"]:checked + label{
+    background-color: #47AC73;
+    transition: all .2s
+}
+input[type="checkbox"]:checked + label::after{
+    content: 'v';
+    color:rgb(255, 255, 255);
+    display: inline-block;
+    position: absolute;
+    top: -1px;
+    left: 4px;
+}

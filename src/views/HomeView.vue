@@ -12,7 +12,13 @@
     </div>
     <div class="veiw">
       <nav class="navbar">
-        <div class="logo">Scheduler</div>
+        <div class="logo">
+          <span class="calendarlogo" style="width:40px;height:40px">
+            <p class="logo_date">{{ date }}</p>
+            <img src="@/assets/calendar.png" alt="calendar" style="width:40px;height:40px">
+          </span>
+          <p class="calendartext">日曆</p>
+        </div>
         <div class="navbar_content">
           <router-link to="/"><i class="fa-solid fa-magnifying-glass fa-xl"></i></router-link>
           <router-link to="/week"><i class="fa-solid fa-cloud-arrow-down fa-xl"></i></router-link>
@@ -27,15 +33,12 @@
         <div class="calandar_content">
           <div class="filter_bar radius">
             <div class="change_unit flex_box filter_radius">
-              <router-link to="/week" class="day cell_grow calandar_type" @click="settype('天')" :class="{cell_grow_mark:type === '天'}">天</router-link>
-              <i class="I"></i>
               <router-link to="/week" class="week cell_grow calandar_type" @click="settype('週')" :class="{cell_grow_mark:type === '週'}">週</router-link>
               <i class="I"></i>
               <router-link to="/" class="month cell_grow calandar_type" @click="settype('月')" :class="{cell_grow_mark:type === '月'}">月</router-link>
             </div>
-            <div class="show_weekend flex_box filter_radius">顯示週末</div>
-            <div class="show_activity flex_box filter_radius">顯示活動</div>
-            <div class="show_off_activity flex_box filter_radius">顯示已拒絕活動</div>
+            <div class="show_weekend flex_box filter_radius" @click="changeweekend" :class="{cell_grow_mark:weekend}">顯示週末</div>
+            <div class="show_off_activity flex_box filter_radius" @click="changestatus" :class="{cell_grow_mark:getstatus}">顯示已停止活動</div>
           </div>
           <router-view></router-view>
         </div>
@@ -61,12 +64,27 @@ export default {
   computed: {
     type(){
       return this.$store.state.calandartype;
+    },
+    getstatus(){
+      return this.$store.state.status;
+    },
+    weekend(){
+      return this.$store.state.weekend;
+    },
+    date(){
+      return this.$store.state.day
     }
   },
   methods: {
     settype(type){
       this.$store.commit('setType', type);
-    }
+    },
+    changestatus(){
+      this.$store.commit('changestatus');
+    },
+    changeweekend(){
+      this.$store.commit('weekend');
+    },
   },
 }
 </script>
@@ -98,7 +116,7 @@ export default {
   margin: 8px 8px 0 0;
   cursor: pointer;
 }
-.modal-close::hover {
+.modal-close:hover {
   color: gray;
 }
 </style>

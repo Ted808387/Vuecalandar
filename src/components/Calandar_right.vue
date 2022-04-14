@@ -30,8 +30,7 @@ export default {
       return this.$store.state.canlandarweek;
     },
     getcalandar(){
-      this.$store.getters.getcalander(42);
-      return this.$store.state.calandar;
+      return this.$store.getters.getcalander(42);
     },
     getyear(){
       return this.$store.state.year;

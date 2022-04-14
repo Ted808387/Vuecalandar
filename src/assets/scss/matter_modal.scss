@@ -21,13 +21,8 @@
             } 
         }
     }
-    .modal_repeat{
-        width: 15%;
-        border: none;
-    }
-    .modal_repeat:hover{
-        background-color: $bg1;
-        transition: background-color 0.3s;
+    .modal_all_day{
+        gap: 50px;
     }
     .modal_detail{
         padding: 5px 0;
@@ -53,6 +48,15 @@
         display: flex;
         justify-content: flex-end;
         gap: 10px;
+        .fa-trash-can{
+            margin: auto 0;
+            color: $col3;
+            cursor: pointer;
+        }
+        .fa-trash-can:hover{
+            color: $col5;
+            transition: color 0.3s;
+        }
         button{
             padding: 3px 10px;
             font-size: 1em;

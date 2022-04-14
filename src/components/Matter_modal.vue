@@ -12,30 +12,29 @@
             <input class="title_text ptb-5" type="text" placeholder="新增標題" v-model="data.title">
             <div class="modal_select js_c ptb-5">
                 <div class="select1">
-                    <input  id="sele1" type="radio" name="select" value="work" v-model="data.type"><label for="sele1">工作</label>
+                    <input  id="sele1" type="radio" name="select" value="1" v-model="data.type" checked><label for="sele1">工作</label>
                 </div>
                 <div class="select2">
-                    <input  id="sele2" type="radio" name="select" value="activity" v-model="data.type"><label for="sele2">活動</label>
+                    <input  id="sele2" type="radio" name="select" value="2" v-model="data.type"><label for="sele2">活動</label>
                 </div>
             </div>
             <div class="modal_time js_c ptb-5">
                 <div class="thing_date">
-                    <input id="start_date" type="date" v-model="this.$store.state.time"><span>~</span>
-                    <input id="end_date" type="date" v-show="data.allday">
+                    <input id="start_date" type="date" v-model="this.$store.state.time">
                 </div>
                 <div class="thing_time" v-show="!data.allday">
-                    <input id="start_time" type="time" v-model="data.start_time"><span>~</span>
+                    <span>-</span>
+                    <input id="start_time" type="time" v-model="data.start_time">
+                    <span>~</span>
                     <input id="end_time" type="time" v-model="data.end_time">
                 </div>
             </div>
             <div class="modal_all_day js_c ptb-5">
                 <input id="all_day" type="checkbox" name="all_day" v-model="data.allday">
-                <label for="all_day">全天</label>
+                <label for="all_day" data-name="全天"></label>
+                <input id="status" type="checkbox" name="status" v-model="data.status">
+                <label for="status" data-name="停止活動"></label>
             </div>
-            <select class="modal_repeat ptb-5" v-model="data.repeat">
-                <option value="unrepeated">不重複</option>
-                <option value="everyday">每天</option>
-            </select>
             <div class="modal_detail js_c ptb-5">
                 <textarea id="textarea" placeholder="輸入內容" rows="3" cols="65" v-model="data.detail"></textarea>
             </div>
@@ -62,16 +61,16 @@ export default {
         return{
             data: {
                 'title': '',
-                'type': '',
+                'type': '1',
                 'start_date': '',
                 'end_date': '',
                 'start_time': '',
                 'end_time': '',
                 'allday': true,
-                'repeat': false,
+                'status': false,
                 'detail': null,
                 'color': '#000000',
-                'id': new Date(),
+                'id': Date.parse(new Date()),
             },
         }
     },
@@ -85,18 +84,19 @@ export default {
                  let data = this.data;
                  this.data = {
                     'title': '',
-                    'type': '',
+                    'type': '1',
                     'start_date': '',
                     'end_date': '',
                     'start_time': '',
                     'end_time': '',
-                    'repeat': false,
+                    'allday': true,
+                    'status': false,
                     'detail': null,
                     'color': '#000000',
-                    'id': new Date(),
+                    'id': Date.parse(new Date()),
                  };
-                 this.allday = true,
                  this.$store.dispatch('settodolist', data);
+                 this.$store.commit('closeModal');
             } else {
                 console.error('請輸入正確資料');
             }

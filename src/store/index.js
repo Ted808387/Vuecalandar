@@ -12,9 +12,13 @@ export default createStore({
     modifyModal: false,
     list: {}, // 暫存用
     thing: {}, // 修改暫存用
-    todolist: [],
+    dateid: 0, // 當前點擊日期id
+    todolist: [], // 全事件存放區
     time: '',
     calandartype: '',
+    worktype: ['1','2'],
+    status: true,
+    weekend: true,
   },
   getters: {
     getcalander: (state) => (num) => {
@@ -66,6 +70,16 @@ export default createStore({
           })
         })
       }
+      return state.calandar
+    },
+    getcurrentweek(state){
+      let currentdate = new Date(state.year, state.month, state.day);
+      let currentday = currentdate.getDay();
+      let startday = currentdate - currentday * 24 * 3600 * 1000;
+      let num = state.calandar.map((item) => {
+        return item.id
+      }).indexOf(startday);
+      return state.currentweek = state.calandar.slice(num, num + 7);
     },
   },
   mutations: {
@@ -88,37 +102,48 @@ export default createStore({
     closeModal(state){
       state.show = !state.show; 
     },
+    closemodifyModal(state){
+      state.modifyModal = !state.modifyModal; 
+    },
     showModal(state, data){
       state.list = data;
       state.show = !state.show;
       state.time = new Date(state.list.id).toLocaleDateString('en-CA');
     },
     settodolist(state, data){
+      let id = (ite) => { return new Date(ite.year, ite.month, ite.day).toLocaleDateString('en-CA') };
+      let num = state.calandar.map((item) => {
+        return id(item)
+      }).indexOf(data.start_date)
+      state.list = state.calandar[num]
       state.list.list = data;
       state.todolist.push(state.list);
-      state.show = !state.show;
     },
     modifyModal(state, data){
       state.modifyModal = !state.modifyModal;
-      state.thing = data;
-      console.log(state.thing)
+      state.dateid = data.dateid;
+      state.thing = data.list;
     },
-    closeModifyModal(state){
-      state.modifyModal = !state.modifyModal; 
+    changeThing(state, thing){
+      if(thing){
+        let index = state.todolist.map((data) => {
+          return data.list.id
+        }).indexOf(thing.id)
+        state.todolist.splice(index, 1);
+      }
     },
     setType(state, type){
       state.calandartype = type;
     },
-    getcurrentweek(state){
-      let currentdate = new Date(state.year, state.month, state.day);
-      let currentday = currentdate.getDay();
-      let startday = currentdate - currentday * 24 * 3600 * 1000;
-      let data = state.calandar;
-      let num = data.map((item) => {
-        return item.id
-      }).indexOf(startday);
-      state.currentweek = data.slice(num, num + 7);
+    setwortype(state, value){
+      state.worktype = value;
     },
+    changestatus(state){
+      state.status = !state.status;
+    },
+    weekend(state){
+      state.weekend = !state.weekend;
+    }
   },
   actions: {
     beforeMonth({ commit }){
@@ -135,6 +160,15 @@ export default createStore({
     },
     settodolist({ commit }, thing){
       commit('settodolist', thing);
+    },
+    changeThing({ commit }, data){
+      commit('changeThing', data)
+      commit('settodolist', data);
+      commit('closemodifyModal');
+    },
+    deleteThing({ commit }, data){
+      commit('changeThing', data)
+      commit('closemodifyModal');
     },
   },
 })

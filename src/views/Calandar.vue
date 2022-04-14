@@ -2,11 +2,11 @@
     <div class="calandar_canter_title radius">
         <div class="canlandar_week" v-for="week, id in getweek" :key="id">{{ week }}</div>
     </div>
-    <div class="calandar radius">
+    <div class="calandar radius" :class="{grid_tempkate: !weekend}">
         <div class="calandar_day" v-for="date in getcalandar" :key="date.id" @click.stop="showModal(date)">
             <p class="day" :class="{ day_font_mark: Date.parse(new Date(year, month, day)) === date.id}">{{ date.day }}</p>
             <ul class="todolist">
-                <li class="matter" v-for="item in date.list" :key="item.id" :style="{'--bgcolor': item.color}" @click.stop="modifyModal(item)">
+                <li class="matter" v-for="item in date.list" v-show="getworktype.indexOf(item.type) !== -1 && (item.status === getstatus || !item.status)" :key="item.id" :style="{'--bgcolor': item.color}" :class="{status_mark: item.status}" @click.stop="modifyModal(item, date.id)">
                     <p class="list">{{ item.start_time }}</p><p class="list">{{ item.title }}</p>
                 </li>
             </ul>
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 
 export default {
     name: 'CalandarContent',
@@ -28,20 +27,41 @@ export default {
     },
     computed: {
         getweek(){
-            return this.$store.state.canlandarweek;
+            let data = this.$store.state.canlandarweek;
+            if(!this.$store.state.weekend){
+                data = data.slice(1, 6);
+            }
+            return data;
         },
         getcalandar(){
-            this.$store.getters.getcalander(35);
             this.$store.commit('setType', '月');
-            return this.$store.state.calandar;
+            let data = [];
+            if(this.$store.state.weekend){
+                data = this.$store.getters.getcalander(35);
+            }
+            else if(!this.$store.state.weekend){
+                data = this.$store.state.calandar.filter((element) => {
+                    return element.date !== '日' && element.date !== '六'
+                })
+            }
+            return data;
+        },   
+        getworktype(){
+            return this.$store.state.worktype;
         },
+        getstatus(){
+            return this.$store.state.status;
+        },
+        weekend(){
+            return this.$store.state.weekend;
+        }
     },
     methods: {
         showModal(list){
             this.$store.dispatch('showModal', list);
         },
-        modifyModal(list){
-            this.$store.commit('modifyModal', list);
+        modifyModal(list, dateid){
+            this.$store.commit('modifyModal', {list, dateid});
         }
     },
 }
