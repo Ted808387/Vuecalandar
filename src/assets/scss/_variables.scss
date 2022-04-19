@@ -5,10 +5,14 @@ $col4: #376B4D;
 $col5: #47AC73;
 
 $bg1: #f1eeee;
-$bg2: white;
-$bg3: #cccccc;
+$bg2: var(--bg2, white);
+$bg3: var(--bg3, #cccccc);
 $bg4: #afadad;
 $bg5: #dfdede;
 $bg6: #807d7d;
-
-$icon1: rgba(136, 139, 137, 0.582);
+$bg7: var(--bg7, #f1eeee);
+$bg8: var(--bg8, white);
+$font_color: var(--font_1, #2c3e50);
+$font_color_2: var(--font_2, white);
+$font_color_change: var(--font_color_change, #2c3e50);
+$icon1: var(--icon, #888b8994);

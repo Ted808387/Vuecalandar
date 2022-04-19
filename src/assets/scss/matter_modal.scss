@@ -1,23 +1,40 @@
+.modal-content {
+    background-color: $bg7;
+    border: 1px solid $bg3;
+}
 .modal_content{
     margin-top: 5px;
     padding: 5px 10px;
     display: flex;
     flex-direction: column;
+    background-color: $bg7;
     .title_text{
         margin-bottom: 5px;
+        background-color: $bg8;
+        color: $font_color;
+        border-radius: 3px;
+        border: 1px solid $bg4;
     }
     .modal_select{
-        gap: 10px;
+        gap: 50px;
     }
     .modal_time{
         .thing_date{
             input[type=date]{
                 height: 28px;
+                background-color: $bg8;
+                color: $font_color;
+                border-radius: 3px;
+                border: 1px solid $bg4;
             }
         }
         .thing_time{
             input[type=time]{
                 height: 28px;
+                background-color: $bg8;
+                color: $font_color;
+                border-radius: 3px;
+                border: 1px solid $bg4;
             } 
         }
     }
@@ -26,22 +43,32 @@
     }
     .modal_detail{
         padding: 5px 0;
+        textarea{
+            background-color: $bg8;
+            color: $font_color;
+            border-radius: 3px;
+            border: 1px solid $bg4;
+        }
     }
     .modal_color{
         input[type=color]{
             appearance: none;
-            width: 20px;
+            width: 22px;
             height: 20px;
             border-radius: 50%;
             border: none;
             background-color: inherit;
             cursor: pointer;
         }
+        input[type=color] + label{
+            color: $font_color;
+        }
         input::-webkit-color-swatch{
             width: 15px;
             height: 15px;
             border-radius: 50%;
-            border: none;
+            border: 2px solid #47AC73; 
+            margin-top: -2px;
         }
     }
     .modal_btn{

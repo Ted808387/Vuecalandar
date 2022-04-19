@@ -1,12 +1,14 @@
 import { createStore } from 'vuex'
+import axios from 'axios';
 
 export default createStore({
   state: {
-    canlandarweek: ['日', '一', '二', '三', '四', '五', '六'],
+    api: 'https://urlcalendar.herokuapp.com/calendar',
+    calendarweek: ['日', '一', '二', '三', '四', '五', '六'],
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
     day: new Date().getDate(),
-    calandar: [],
+    calendar: [],
     currentweek:[],
     show: false,
     modifyModal: false,
@@ -15,17 +17,17 @@ export default createStore({
     dateid: 0, // 當前點擊日期id
     todolist: [], // 全事件存放區
     time: '',
-    calandartype: '',
+    calendartype: '',
     worktype: ['1','2'],
     status: true,
     weekend: true,
   },
   getters: {
-    getcalander: (state) => (num) => {
+    getcalender: (state) => (num) => {
       let fistday = new Date(state.year, state.month, 1);
       let weekday = fistday.getDay();
       let startday = fistday - weekday * 24 * 3600 * 1000;
-      state.calandar = [];
+      state.calendar = [];
       for(let i = 0; i < num; i++){
         let date = new Date(startday + i * 24 * 3600 * 1000)
         let day = '';
@@ -52,7 +54,7 @@ export default createStore({
             day = '六';
             break;
         }
-        state.calandar.push({
+        state.calendar.push({
           'day': date.getDate(),
           'month': date.getMonth(),
           'year': date.getFullYear(),
@@ -62,7 +64,7 @@ export default createStore({
         });
       }
       if(state.todolist){
-        state.calandar.forEach((item) => {
+        state.calendar.forEach((item) => {
           state.todolist.forEach((thing) => {
             if(item.id === thing.id){
               item.list.push(thing.list)
@@ -70,16 +72,25 @@ export default createStore({
           })
         })
       }
-      return state.calandar
+      return state.calendar
     },
     getcurrentweek(state){
       let currentdate = new Date(state.year, state.month, state.day);
       let currentday = currentdate.getDay();
       let startday = currentdate - currentday * 24 * 3600 * 1000;
-      let num = state.calandar.map((item) => {
+      let num = state.calendar.map((item) => {
         return item.id
       }).indexOf(startday);
-      return state.currentweek = state.calandar.slice(num, num + 7);
+      state.currentweek = state.calendar.slice(num, num + 7);
+      let data = [];
+      if(!state.weekend){
+        data = state.currentweek.filter((element) => {
+          return element.date !== '日' && element.date !== '六'
+        })
+      }else{
+        data = state.currentweek;
+      }
+      return data;
     },
   },
   mutations: {
@@ -112,10 +123,10 @@ export default createStore({
     },
     settodolist(state, data){
       let id = (ite) => { return new Date(ite.year, ite.month, ite.day).toLocaleDateString('en-CA') };
-      let num = state.calandar.map((item) => {
+      let num = state.calendar.map((item) => {
         return id(item)
       }).indexOf(data.start_date)
-      state.list = state.calandar[num]
+      state.list = state.calendar[num]
       state.list.list = data;
       state.todolist.push(state.list);
     },
@@ -133,7 +144,7 @@ export default createStore({
       }
     },
     setType(state, type){
-      state.calandartype = type;
+      state.calendartype = type;
     },
     setwortype(state, value){
       state.worktype = value;
@@ -143,6 +154,9 @@ export default createStore({
     },
     weekend(state){
       state.weekend = !state.weekend;
+    },
+    getodolist(state, data){
+      state.todolist = data;
     }
   },
   actions: {
@@ -158,17 +172,31 @@ export default createStore({
     closeModal({ commit }){
       commit('closeModal');
     },
-    settodolist({ commit }, thing){
-      commit('settodolist', thing);
+    async settodolist(context, thing){
+    context.commit('settodolist', thing);
+    await axios.post(context.state.api, context.state.list)
+    .then((response) => console.log(response))
+    .catch((error) => console.log(error))
     },
-    changeThing({ commit }, data){
-      commit('changeThing', data)
-      commit('settodolist', data);
-      commit('closemodifyModal');
+    async changeThing(context, data){
+      context.commit('changeThing', data);
+      context.commit('settodolist', data);
+      context.commit('closemodifyModal');
+      await axios.put(`${context.state.api}/${data.id}`, context.state.list)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error))
     },
-    deleteThing({ commit }, data){
-      commit('changeThing', data)
-      commit('closemodifyModal');
+    async deleteThing(context, data){
+      context.commit('changeThing', data)
+      context.commit('closemodifyModal');
+      await axios.delete(`${context.state.api}/${data.id}`)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error))
     },
+    gettodolist(context){
+      axios.get(context.state.api)
+      .then(({data}) => context.commit('getodolist' ,data.data))
+      .catch((error) => console.log(error))
+    }
   },
 })

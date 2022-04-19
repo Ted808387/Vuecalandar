@@ -12,10 +12,10 @@
             <input class="title_text ptb-5" type="text" placeholder="新增標題" v-model="data.title">
             <div class="modal_select js_c ptb-5">
                 <div class="select1">
-                    <input  id="sele1" type="radio" name="select" value="1" v-model="data.type" checked><label for="sele1">工作</label>
+                    <input  id="sele1" type="radio" name="select" value="1" v-model="data.type" checked><label for="sele1" data-name="工作"></label>
                 </div>
                 <div class="select2">
-                    <input  id="sele2" type="radio" name="select" value="2" v-model="data.type"><label for="sele2">活動</label>
+                    <input  id="sele2" type="radio" name="select" value="2" v-model="data.type"><label for="sele2" data-name="活動"></label>
                 </div>
             </div>
             <div class="modal_time js_c ptb-5">
@@ -119,9 +119,8 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
-  border: 1px solid #e2e8f0;
+  /* border: 1px solid #f0e8e2; */
   border-radius: 0.25rem;
-  background: #fff;
 }
 .modal__title {
   font-size: 1.5rem;

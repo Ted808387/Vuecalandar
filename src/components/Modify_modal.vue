@@ -12,10 +12,10 @@
                 <input class="title_text ptb-5" type="text" placeholder="新增標題" v-model="modifything.title">
                 <div class="modal_select js_c ptb-5">
                     <div class="select1">
-                        <input  id="sele1" type="radio" name="select" value="1" v-model="modifything.type"><label for="sele1">工作</label>
+                        <input  id="sele1" type="radio" name="select" value="1" v-model="modifything.type"><label for="sele1" data-name="工作"></label>
                     </div>
                     <div class="select2">
-                        <input  id="sele2" type="radio" name="select" value="2" v-model="modifything.type"><label for="sele2">活動</label>
+                        <input  id="sele2" type="radio" name="select" value="2" v-model="modifything.type"><label for="sele2" data-name="活動"></label>
                     </div>
                 </div>
                 <div class="modal_time js_c ptb-5">

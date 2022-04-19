@@ -1,9 +1,9 @@
 <template>
-    <div class="calandar_canter_title radius">
-        <div class="canlandar_week" v-for="week, id in getweek" :key="id">{{ week }}</div>
+    <div class="calendar_canter_title radius">
+        <div class="calendar_week" v-for="week, id in getweek" :key="id">{{ week }}</div>
     </div>
-    <div class="calandar radius" :class="{grid_tempkate: !weekend}">
-        <div class="calandar_day" v-for="date in getcalandar" :key="date.id" @click.stop="showModal(date)">
+    <div class="calendar radius" :class="{grid_tempkate: !weekend}">
+        <div class="calendar_day" v-for="date in getcalandar" :key="date.id" @click.stop="showModal(date)">
             <p class="day" :class="{ day_font_mark: Date.parse(new Date(year, month, day)) === date.id}">{{ date.day }}</p>
             <ul class="todolist">
                 <li class="matter" v-for="item in date.list" v-show="getworktype.indexOf(item.type) !== -1 && (item.status === getstatus || !item.status)" :key="item.id" :style="{'--bgcolor': item.color}" :class="{status_mark: item.status}" @click.stop="modifyModal(item, date.id)">
@@ -17,7 +17,7 @@
 <script>
 
 export default {
-    name: 'CalandarContent',
+    name: 'CalendarCenter',
     data(){
         return{
             day: this.$store.state.day,
@@ -27,7 +27,7 @@ export default {
     },
     computed: {
         getweek(){
-            let data = this.$store.state.canlandarweek;
+            let data = this.$store.state.calendarweek;
             if(!this.$store.state.weekend){
                 data = data.slice(1, 6);
             }
@@ -37,10 +37,10 @@ export default {
             this.$store.commit('setType', '月');
             let data = [];
             if(this.$store.state.weekend){
-                data = this.$store.getters.getcalander(35);
+                data = this.$store.getters.getcalender(35);
             }
             else if(!this.$store.state.weekend){
-                data = this.$store.state.calandar.filter((element) => {
+                data = this.$store.state.calendar.filter((element) => {
                     return element.date !== '日' && element.date !== '六'
                 })
             }

@@ -1,24 +1,26 @@
-.small_calandar{
+.small_calendar{
     padding: 10px;
-    color: $bg2;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     .title{
         flex-grow: 1;
         display: flex;
         justify-content: space-between;
         padding: 5px 0;
         border-bottom: 2px solid $col5;
-        .calandar_title{
+        color: black;
+        .calendar_title{
             display: flex;
             gap: 5px;
+            color: $font_color;
         }
         .fa-solid{
             color: $col5;
         }
     }
-    .calandar_right_content{
-        color: $bg6;
+    .calendar_right_content{
+        color: $bg4;
         margin-top: 10px;
         flex-grow: 30;
         display: grid;
@@ -26,28 +28,31 @@
         grid-template-columns: repeat(7, 1fr);
         grid-column-gap: 5px; 
         font-size: 0.9em;
-        .calandar_week{
+        .calendar_week{
+            font-weight: 600;
             font-style: normal;
             color: $col3;
         }
-        .calandar_week,.calandar_date{
+        .calendar_week,.calendar_date{
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        .calandar_date{
+        .calendar_date{
+            font-style: normal;
             cursor: pointer;
         }
-        .calandar_date:hover{
+        .calendar_date:hover{
             color: $col5;
             transition: color 0.3s;
         }
     }
 }
 .month_mark{
-    color: $bg2;
+    color: $col4;
 }
 .mark{
+    font-weight: 600;
     color: $col3;
     border-bottom: 2px solid $col2;
 }

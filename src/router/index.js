@@ -1,21 +1,20 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView,
+    component: () => import('../views/CalendarView.vue'),
     children: [
       {
         path: '/',
-        name: 'calandar',
-        component: () => import('../views/Calandar.vue')
+        name: 'CalendarCenter',
+        component: () => import('../views/Calendar.vue')
       },
       {
         path: 'week',
-        name: 'calandarweek',
-        component: () => import('../views/Calandar_week.vue')
+        name: 'CalendarWeek',
+        component: () => import('../views/Calendar_week.vue')
       },
     ],
   },
