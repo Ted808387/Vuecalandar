@@ -91,7 +91,7 @@ export default {
   },
   created(){
     this.$store.commit('setType', '月');
-    // this.$store.dispatch('gettodolist');
+    this.$store.dispatch('gettodolist');
   }
 }
 </script>
