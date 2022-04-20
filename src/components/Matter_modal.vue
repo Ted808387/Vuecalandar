@@ -119,7 +119,6 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 0 1rem;
-  /* border: 1px solid #f0e8e2; */
   border-radius: 0.25rem;
 }
 .modal__title {

@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    api: 'https://urlcalendar.herokuapp.com/calendar',
+    // api: 'https://urlcalendar.herokuapp.com/calendar',
     calendarweek: ['日', '一', '二', '三', '四', '五', '六'],
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
