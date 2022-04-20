@@ -10,7 +10,7 @@
     </div>
     <div class="calendar_right_content">
       <i class="calendar_week" v-for="week in getweek" :key="week">{{ week }}</i>
-      <!-- <i class="calendar_date" v-for="date in getcalendar" :key="date.id" :class="{ mark: date.day === day && date.month === month && date.year === year, month_mark: date.month === month && date.year === year}">{{ date.day }}</i> -->
+      <i class="calendar_date" v-for="date in getcalendar" :key="date.id" :class="{ mark: date.day === day && date.month === month && date.year === year, month_mark: date.month === month && date.year === year}">{{ date.day }}</i>
     </div>
   </div>
 </template>
@@ -29,9 +29,9 @@ export default {
     getweek(){
       return this.$store.state.calendarweek;
     },
-    // getcalendar(){
-    //   return this.$store.getters.getcalender(42);
-    // },
+    getcalendar(){
+      return this.$store.getters.getcalender(35);
+    },
     getyear(){
       return this.$store.state.year;
     },

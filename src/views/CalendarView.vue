@@ -14,7 +14,6 @@
         <div class="navbar_content">
           <router-link to="/" @click="change" v-if="changedeep"><i class="fa-solid fa-moon fa-xl"></i></router-link>
           <router-link to="/" @click="change" v-else><i class="fa-regular fa-sun fa-xl"></i></router-link>
-          <router-link to="/"><i class="fa-solid fa-right-to-bracket fa-xl"></i></router-link>
         </div>
       </nav>
       <div class="veiw_calendar">

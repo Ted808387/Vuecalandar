@@ -37,7 +37,7 @@ export default {
             this.$store.commit('setType', '月');
             let data = [];
             if(this.$store.state.weekend){
-                data = this.$store.getters.getcalender(35);
+                data = this.$store.state.calendar;
             }
             else if(!this.$store.state.weekend){
                 data = this.$store.state.calendar.filter((element) => {
