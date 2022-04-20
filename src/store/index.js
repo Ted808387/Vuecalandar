@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import axios from 'axios';
+// import axios from 'axios';
 
 export default createStore({
   state: {
@@ -155,9 +155,9 @@ export default createStore({
     weekend(state){
       state.weekend = !state.weekend;
     },
-    getodolist(state, data){
-      state.todolist = data;
-    }
+    // getodolist(state, data){
+    //   state.todolist = data;
+    // }
   },
   actions: {
     beforeMonth({ commit }){
@@ -174,29 +174,29 @@ export default createStore({
     },
     async settodolist(context, thing){
     context.commit('settodolist', thing);
-    await axios.post(context.state.api, context.state.list)
-    .then((response) => console.log(response))
-    .catch((error) => console.log(error))
+    // await axios.post(context.state.api, context.state.list)
+    // .then((response) => console.log(response))
+    // .catch((error) => console.log(error))
     },
     async changeThing(context, data){
       context.commit('changeThing', data);
       context.commit('settodolist', data);
       context.commit('closemodifyModal');
-      await axios.put(`${context.state.api}/${data.id}`, context.state.list)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error))
+      // await axios.put(`${context.state.api}/${data.id}`, context.state.list)
+      // .then((response) => console.log(response))
+      // .catch((error) => console.log(error))
     },
     async deleteThing(context, data){
       context.commit('changeThing', data)
       context.commit('closemodifyModal');
-      await axios.delete(`${context.state.api}/${data.id}`)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error))
+      // await axios.delete(`${context.state.api}/${data.id}`)
+      // .then((response) => console.log(response))
+      // .catch((error) => console.log(error))
     },
-    gettodolist(context){
-      axios.get(context.state.api)
-      .then(({data}) => context.commit('getodolist' ,data.data))
-      .catch((error) => console.log(error))
-    }
+    // gettodolist(context){
+    //   axios.get(context.state.api)
+    //   .then(({data}) => context.commit('getodolist' ,data.data))
+    //   .catch((error) => console.log(error))
+    // }
   },
 })
