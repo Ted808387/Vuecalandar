@@ -6,5 +6,4 @@ const changestyle = (style) => {
     document.getElementsByTagName("body")[0].style.setProperty("--font_2",style ? "#2c3e50" : "white");
     document.getElementsByTagName("body")[0].style.setProperty("--icon",style ? "white" : "#888b8994");
 }
-
 export default changestyle
